@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    #region Sound
+    [SerializeField] AudioSource _menuBackgroundMusic;
+    [SerializeField] AudioSource _meadowBackgroundMusic;
+
+    #endregion
+
+    #region Pause
+    public bool _isPaused;
+    public bool _isPlaying;
+    #endregion
+
     // Start is called before the first frame update
     void Start()
     {
