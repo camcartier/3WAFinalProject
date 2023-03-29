@@ -8,7 +8,9 @@ public class InputReader : MonoBehaviour, Controls.IMainActions
 {
     private Controls controls;
 
+
     public event Action JumpEvent, DashEvent, UseEvent, MoveEvent, AttackEvent;
+    public Vector2 MovementValue { get; private set; }
 
     void Start()
     {
@@ -42,8 +44,7 @@ public class InputReader : MonoBehaviour, Controls.IMainActions
     }
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (!context.performed) { return; }
-        MoveEvent?.Invoke();
+        MovementValue = context.ReadValue<Vector2>();
     }
     public void OnUse(InputAction.CallbackContext context)
     {
