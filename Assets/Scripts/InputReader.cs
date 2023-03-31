@@ -9,7 +9,7 @@ public class InputReader : MonoBehaviour, Controls.IMainActions
     private Controls controls;
 
 
-    public event Action JumpEvent, DashEvent, UseEvent, MoveEvent, AttackEvent;
+    public event Action JumpEvent, DashEvent, UseEvent, AttackEvent;
     public Vector2 MovementValue { get; private set; }
 
     void Start()
@@ -29,13 +29,11 @@ public class InputReader : MonoBehaviour, Controls.IMainActions
     {
         if(!context.performed) { return; }
         JumpEvent?.Invoke();
-
     }
     public void OnAttack(InputAction.CallbackContext context)
     {
         if(!context.performed) { return; }
-        AttackEvent?.Invoke();
-        
+        AttackEvent?.Invoke(); 
     }
     public void OnDash(InputAction.CallbackContext context)
     {
@@ -50,11 +48,10 @@ public class InputReader : MonoBehaviour, Controls.IMainActions
     {
         if (!context.performed) { return; }
         UseEvent?.Invoke();
-
     }
 
-
-
-
-
+    public void OnLook(InputAction.CallbackContext context)
+    {
+        //code is being handled by cinemachine
+    }
 }
