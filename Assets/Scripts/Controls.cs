@@ -80,6 +80,24 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Target"",
+                    ""type"": ""Button"",
+                    ""id"": ""e6b877cd-e69f-42df-8996-3345129bfada"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""aabae850-46ec-42fb-a288-1a1d9f068119"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -357,6 +375,39 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""38184189-c966-4aba-b9d5-e60562944721"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""MouseEKeyboard"",
+                    ""action"": ""Target"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""21dd8c61-c569-4619-8c33-e50e5c201d06"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Target"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c5910457-2437-457b-a451-26a328747000"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""MouseEKeyboard"",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -399,6 +450,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Main_Use = m_Main.FindAction("Use", throwIfNotFound: true);
         m_Main_Attack = m_Main.FindAction("Attack", throwIfNotFound: true);
         m_Main_Look = m_Main.FindAction("Look", throwIfNotFound: true);
+        m_Main_Target = m_Main.FindAction("Target", throwIfNotFound: true);
+        m_Main_Cancel = m_Main.FindAction("Cancel", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -464,6 +517,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Main_Use;
     private readonly InputAction m_Main_Attack;
     private readonly InputAction m_Main_Look;
+    private readonly InputAction m_Main_Target;
+    private readonly InputAction m_Main_Cancel;
     public struct MainActions
     {
         private @Controls m_Wrapper;
@@ -474,6 +529,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Use => m_Wrapper.m_Main_Use;
         public InputAction @Attack => m_Wrapper.m_Main_Attack;
         public InputAction @Look => m_Wrapper.m_Main_Look;
+        public InputAction @Target => m_Wrapper.m_Main_Target;
+        public InputAction @Cancel => m_Wrapper.m_Main_Cancel;
         public InputActionMap Get() { return m_Wrapper.m_Main; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -501,6 +558,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Look.started -= m_Wrapper.m_MainActionsCallbackInterface.OnLook;
                 @Look.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnLook;
                 @Look.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnLook;
+                @Target.started -= m_Wrapper.m_MainActionsCallbackInterface.OnTarget;
+                @Target.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnTarget;
+                @Target.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnTarget;
+                @Cancel.started -= m_Wrapper.m_MainActionsCallbackInterface.OnCancel;
+                @Cancel.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnCancel;
+                @Cancel.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnCancel;
             }
             m_Wrapper.m_MainActionsCallbackInterface = instance;
             if (instance != null)
@@ -523,6 +586,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Look.started += instance.OnLook;
                 @Look.performed += instance.OnLook;
                 @Look.canceled += instance.OnLook;
+                @Target.started += instance.OnTarget;
+                @Target.performed += instance.OnTarget;
+                @Target.canceled += instance.OnTarget;
+                @Cancel.started += instance.OnCancel;
+                @Cancel.performed += instance.OnCancel;
+                @Cancel.canceled += instance.OnCancel;
             }
         }
     }
@@ -553,5 +622,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnUse(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
+        void OnTarget(InputAction.CallbackContext context);
+        void OnCancel(InputAction.CallbackContext context);
     }
 }
