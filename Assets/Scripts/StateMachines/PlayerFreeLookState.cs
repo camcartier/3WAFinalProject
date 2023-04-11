@@ -32,7 +32,9 @@ public class PlayerFreeLookState : PlayerBaseState
         movement.y = 0f;
         movement.z = stateMachine.InputReader.MovementValue.y;*/
 
-        stateMachine.Controller.Move(movement * Time.deltaTime * stateMachine._movementSpeed);
+        Move(movement * stateMachine._movementSpeed, deltaTime);
+
+        //stateMachine.Controller.Move(movement * Time.deltaTime * stateMachine._movementSpeed);
 
         if (stateMachine.InputReader.MovementValue == Vector2.zero)
         {
