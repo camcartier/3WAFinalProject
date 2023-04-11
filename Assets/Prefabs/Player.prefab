@@ -1330,8 +1330,8 @@ MonoBehaviour:
   m_BindingMode: 5
   m_FollowOffset: {x: 0, y: 1.08, z: -4.02}
   m_XDamping: 1
-  m_YDamping: 3
-  m_ZDamping: 3
+  m_YDamping: 15
+  m_ZDamping: 10
   m_AngularDampingMode: 0
   m_PitchDamping: 0
   m_YawDamping: 0
@@ -1810,8 +1810,8 @@ MonoBehaviour:
   m_BindingMode: 5
   m_FollowOffset: {x: 0, y: 1.08, z: -4.02}
   m_XDamping: 1
-  m_YDamping: 3
-  m_ZDamping: 3
+  m_YDamping: 15
+  m_ZDamping: 10
   m_AngularDampingMode: 0
   m_PitchDamping: 0
   m_YawDamping: 0
@@ -2355,12 +2355,12 @@ MonoBehaviour:
   m_BindingMode: 5
   m_SplineCurvature: 0.2
   m_Orbits:
-  - m_Height: 2.79
-    m_Radius: 4.08
+  - m_Height: 1.85
+    m_Radius: 4
   - m_Height: 1.08
-    m_Radius: 4.02
-  - m_Height: 0.63
-    m_Radius: 2.58
+    m_Radius: 3.5
+  - m_Height: 0.62
+    m_Radius: 2.6
   m_LegacyHeadingBias: 3.4028235e+38
   m_Rigs:
   - {fileID: 2047266670401051225}
@@ -2473,8 +2473,8 @@ MonoBehaviour:
   m_BindingMode: 5
   m_FollowOffset: {x: 0, y: 1.08, z: -4.02}
   m_XDamping: 1
-  m_YDamping: 3
-  m_ZDamping: 3
+  m_YDamping: 15
+  m_ZDamping: 10
   m_AngularDampingMode: 0
   m_PitchDamping: 0
   m_YawDamping: 0

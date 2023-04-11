@@ -7,8 +7,10 @@ public class ForceReceiver : MonoBehaviour
     [SerializeField] CharacterController controller;
 
     private float verticalVelocity;
+    private float horizontalVelocity;   
 
     public Vector3 Movement => Vector3.up * verticalVelocity;
+
 
     private void Update()
     {
@@ -20,5 +22,15 @@ public class ForceReceiver : MonoBehaviour
         {
             verticalVelocity += Physics.gravity.y * Time.deltaTime;
         }
+    }
+
+    public void Jump(float jumpForce)
+    {
+        verticalVelocity += jumpForce;    
+    }
+
+    public void Dash(float dashForce)
+    {
+        horizontalVelocity += dashForce;
     }
 }

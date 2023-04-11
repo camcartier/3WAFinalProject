@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour
     #region Pause
     public bool _gameIsPaused;
     public bool _gameIsPlaying;
+    [SerializeField] GameObject PausePanel; 
     #endregion
 
     #region Unlocks
@@ -24,6 +26,19 @@ public class GameManager : MonoBehaviour
     public bool _hasSword;
     #endregion
 
+    #region Sliders
+    [SerializeField] ManaSlider ManaSlider;
+    [SerializeField] HealthSlider HealthSlider;
+    #endregion
+
+    #region Stats
+    [SerializeField] PlayerData PlayerData;
+    #endregion
+
+    #region Health&Mana
+    private int _storedMana;
+    private int _storedHealth;
+    #endregion
 
     // Start is called before the first frame update
     void Start()
@@ -44,7 +59,22 @@ public class GameManager : MonoBehaviour
             ResumeGame();
             _gameIsPaused = false;
         }
+
+        /*
+        if ()
+        {
+
+        }*/
     }
+
+    public void LevelUp()
+    {
+        PlayerData._maxMana += 10;
+        PlayerData._maxHealth += 2;
+        ManaSlider.SetMaxMana(PlayerData._maxMana);
+        HealthSlider.SetMaxHealth(PlayerData._maxHealth);
+    }
+
     public void LoadNextScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

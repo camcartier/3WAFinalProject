@@ -6,7 +6,7 @@ public class PlayerFreeLookState : PlayerBaseState
 {
      
     Vector3 movement = new Vector3();
-    public const float AnimatorDampTime = 0.1f;
+    private const float AnimatorDampTime = 0.1f;
 
 
     //we attribute an int to this string for faster code
@@ -19,6 +19,8 @@ public class PlayerFreeLookState : PlayerBaseState
     public override void Enter()
     {
         stateMachine.InputReader.JumpEvent += OnJump;
+        stateMachine.InputReader.DashEvent += OnDash;
+
         stateMachine.InputReader.TargetEvent += OnTarget;
         stateMachine.InputReader.TargetEvent += OnCancel;
 
@@ -48,6 +50,8 @@ public class PlayerFreeLookState : PlayerBaseState
     public override void Exit()
     {
         stateMachine.InputReader.JumpEvent -= OnJump;
+        stateMachine.InputReader.DashEvent -= OnDash;
+
         stateMachine.InputReader.TargetEvent -= OnTarget;
         stateMachine.InputReader.CancelEvent -= OnCancel;
         //Debug.Log("exit");
@@ -75,7 +79,7 @@ public class PlayerFreeLookState : PlayerBaseState
 
     private void OnJump()
     {
-
+        stateMachine.SwitchState(new PlayerJumpingState(stateMachine));
     }
 
     private void OnTarget()
@@ -86,5 +90,10 @@ public class PlayerFreeLookState : PlayerBaseState
     private void OnCancel()
     {
         stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
+    }
+
+    private void OnDash()
+    {
+        stateMachine.SwitchState(new PlayerDashingState(stateMachine));
     }
 }

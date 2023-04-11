@@ -2,17 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerFallingState : MonoBehaviour
+public class PlayerFallingState : PlayerBaseState
 {
-    // Start is called before the first frame update
-    void Start()
+
+    private readonly int FallHash = Animator.StringToHash("fall");
+    private const float CrossFadeDuration = 0.1f;
+
+    private Vector3 momentum;
+
+    public PlayerFallingState(PlayerStateMachine stateMachine) : base(stateMachine){}
+
+    public override void Enter()
     {
-        
+        momentum = stateMachine.Controller.velocity;
+        momentum.y = 0;
+
+        stateMachine.Animator.CrossFadeInFixedTime(FallHash, CrossFadeDuration);
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Tick(float deltaTime)
     {
-        
+        Move(momentum, deltaTime);
+
+        if (stateMachine.Controller.isGrounded)
+        {
+            ReturnToLocomotion();
+        }
+
+        //FaceTarget();
     }
+
+    public override void Exit()
+    {
+    }
+
+    private void OnFall()
+    {
+
+    }
+
 }
