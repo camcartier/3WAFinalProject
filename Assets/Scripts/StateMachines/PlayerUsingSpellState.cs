@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerUsingSpellState : PlayerBaseState
 {
+    [SerializeField] GameManager GameManager;
 
     [SerializeField] PlayerData PlayerData;
 
@@ -14,6 +15,8 @@ public class PlayerUsingSpellState : PlayerBaseState
 
     public override void Enter()
     {
+        GameManager._isUsingSpell = true;
+
         stateMachine.Animator.CrossFadeInFixedTime(UsingSpellHash, CrossFadeDuration);
     }
     public override void Tick(float deltaTime)
@@ -28,6 +31,6 @@ public class PlayerUsingSpellState : PlayerBaseState
     }
     public override void Exit()
     {
-
+        GameManager._isUsingSpell = false;
     }
 }

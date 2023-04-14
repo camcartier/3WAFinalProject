@@ -7,9 +7,9 @@ public class PlayerData : ScriptableObject
 {
     [Header("Health&Mana")]
     public int _maxHealth;
-    public int _currentHealth;
+    public float _currentHealth;
     public int _maxMana;
-    public int _currentMana;
+    public float _currentMana;
     [Header("SpellPowers")]
     public int _spellPower;
     [Header("OtherStats")]

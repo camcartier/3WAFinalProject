@@ -40,6 +40,10 @@ public class GameManager : MonoBehaviour
     private int _storedHealth;
     #endregion
 
+    #region Spells
+    public bool _isUsingSpell;
+    #endregion
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +53,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
         if (Input.GetKeyDown(KeyCode.Escape) && !_gameIsPaused)
         {
             PauseGame();
@@ -59,6 +65,12 @@ public class GameManager : MonoBehaviour
             ResumeGame();
             _gameIsPaused = false;
         }
+
+        if (_isUsingSpell && PlayerData._currentMana > 0)
+        {
+            PlayerData._currentMana -= 0.1f;
+        }
+
 
         /*
         if ()

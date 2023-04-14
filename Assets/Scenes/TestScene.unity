@@ -276,7 +276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.23471296, b: 0.15566039, a: 1}
+  m_Color: {r: 1, g: 0.31121102, b: 0.24056602, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -581,7 +581,7 @@ MonoBehaviour:
   m_VolumeLayerMask:
     serializedVersion: 2
     m_Bits: 1
-  m_VolumeTrigger: {fileID: 0}
+  m_VolumeTrigger: {fileID: 1494945301}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
   m_Antialiasing: 0
@@ -1360,7 +1360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.1745283, g: 0.88159335, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.92101526, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2435,7 +2435,7 @@ PrefabInstance:
     - target: {fileID: 6286618124277041745, guid: 60529e7747572764c8c0a22af8997afd,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000037252903
+      value: 0.000000004656613
       objectReference: {fileID: 0}
     - target: {fileID: 6907655614703468196, guid: 60529e7747572764c8c0a22af8997afd,
         type: 3}
@@ -2500,7 +2500,7 @@ PrefabInstance:
     - target: {fileID: 7802005603768510758, guid: 60529e7747572764c8c0a22af8997afd,
         type: 3}
       propertyPath: <DoubleJumpForce>k__BackingField
-      value: 10
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 7922600469286135747, guid: 60529e7747572764c8c0a22af8997afd,
         type: 3}
@@ -3642,6 +3642,7 @@ MonoBehaviour:
   ManaSlider: {fileID: 853845023}
   HealthSlider: {fileID: 2046183860}
   PlayerData: {fileID: 11400000, guid: 155250aef4a7b4047a5575751ef4ee8f, type: 2}
+  _isUsingSpell: 0
 --- !u!4 &1789585604
 Transform:
   m_ObjectHideFlags: 0
@@ -4073,7 +4074,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2110778595
 PrefabInstance:
