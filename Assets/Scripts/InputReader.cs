@@ -12,6 +12,7 @@ public class InputReader : MonoBehaviour, Controls.IMainActions
 
     public Vector2 MovementValue { get; private set; }
 
+
     void Start()
     {
         controls = new Controls();

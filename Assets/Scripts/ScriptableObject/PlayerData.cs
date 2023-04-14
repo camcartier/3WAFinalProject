@@ -14,7 +14,7 @@ public class PlayerData : ScriptableObject
     public int _spellPower;
     [Header("OtherStats")]
     public int _movementSpeed;
-    public int _dashLenght;
+    public float _dashLenght;
     public int _jumpHeight;
     public bool _canUseIce;
     public bool _canUseFire;

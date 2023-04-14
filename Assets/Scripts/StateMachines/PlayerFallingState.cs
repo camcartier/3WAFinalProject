@@ -14,6 +14,8 @@ public class PlayerFallingState : PlayerBaseState
 
     public override void Enter()
     {
+        Debug.Log("falling");
+
         momentum = stateMachine.Controller.velocity;
         momentum.y = 0;
 
@@ -24,8 +26,10 @@ public class PlayerFallingState : PlayerBaseState
     {
         Move(momentum, deltaTime);
 
-        if (stateMachine.Controller.isGrounded)
+        if (stateMachine.Controller.isGrounded )
         {
+            Debug.Log("grounded");
+
             ReturnToLocomotion();
         }
 

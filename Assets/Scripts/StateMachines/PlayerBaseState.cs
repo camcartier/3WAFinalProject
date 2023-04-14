@@ -28,4 +28,27 @@ public abstract class PlayerBaseState : State
             stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
         }
     }
+
+
+    protected void FaceTarget()
+    {
+        if (stateMachine.Targeter.CurrentTarget == null) { return;  }
+
+        Vector3 LookPos = stateMachine.Targeter.CurrentTarget.transform.position - stateMachine.transform.position;
+        LookPos.y = 0f;
+
+        stateMachine.transform.rotation = Quaternion.LookRotation(LookPos);
+    }
+
+
+
+
+    #region testing
+    /*
+    protected void Dash(Vector3 motion, float deltaTime)
+    {
+
+    }
+    */
+    #endregion
 }

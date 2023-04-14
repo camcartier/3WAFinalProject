@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e4532f6e0ac7c346bed7a2127b89726, type: 3}
+  m_Name: PlayerData
+  m_EditorClassIdentifier: 
+  _maxHealth: 20
+  _currentHealth: 20
+  _maxMana: 30
+  _currentMana: 30
+  _spellPower: 1
+  _movementSpeed: 1
+  _dashLenght: 0.5
+  _jumpHeight: 1
+  _canUseIce: 0
+  _canUseFire: 0
+  _canDoubleJump: 0

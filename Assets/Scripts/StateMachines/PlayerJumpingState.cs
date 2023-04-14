@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using UnityEngine.InputSystem;
 
 public class PlayerJumpingState : PlayerBaseState
 {
@@ -8,6 +10,8 @@ public class PlayerJumpingState : PlayerBaseState
     private bool _canJumpTwice;
     private bool _hasJumpedOnce;
     private bool _hasJumpedTwice;
+
+    //public event Action DoubleJumpEvent;
 
     private readonly int JumpHash = Animator.StringToHash("jump");
     private const float CrossFadeDuration = 0.1f;
@@ -18,6 +22,8 @@ public class PlayerJumpingState : PlayerBaseState
 
     public override void Enter()
     {
+        stateMachine.InputReader.JumpEvent += OnJump;
+
         stateMachine.ForceReceiver.Jump(stateMachine.JumpForce);
 
         momentum = stateMachine.Controller.velocity;
@@ -38,11 +44,22 @@ public class PlayerJumpingState : PlayerBaseState
     }
     public override void Exit()
     {
-
+        stateMachine.InputReader.JumpEvent -= OnJump;
     }
+
+
+    /*
+    public void OnDoubleJump(InputAction.CallbackContext context)
+    {
+        if (!context.performed) { return; }
+
+        DoubleJumpEvent?.Invoke();
+    }*/
+    
 
     private void OnJump()
     {
-        
+        stateMachine.SwitchState(new PlayerDoubleJumpState(stateMachine));
     }
+
 }

@@ -148,7 +148,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""a6595d60-40c3-4244-9fee-f5a68f3d4fb8"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/ctrl"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""MouseEKeyboard"",

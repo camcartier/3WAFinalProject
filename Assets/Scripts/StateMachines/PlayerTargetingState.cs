@@ -27,6 +27,9 @@ public class PlayerTargetingState : PlayerBaseState
             return;
         }
 
+        FaceTarget();
+
+
         //Debug.Log(stateMachine.Targeter.CurrentTarget);
     }
     public override void Exit()
@@ -45,6 +48,16 @@ public class PlayerTargetingState : PlayerBaseState
         stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
     }
 
+    private Vector3 CalculateMovement()
+    {
+        Vector3 movement = new Vector3();
+
+
+
+        return movement;
+    }
+
+
     private void OnJump()
     {
         stateMachine.SwitchState(new PlayerJumpingState(stateMachine));
@@ -52,6 +65,6 @@ public class PlayerTargetingState : PlayerBaseState
 
     private void OnDash() 
     {
-        stateMachine.SwitchState(new PlayerDashingState(stateMachine));
+        stateMachine.SwitchState(new PlayerDashingState(stateMachine, stateMachine.InputReader.MovementValue ));
     }
 }

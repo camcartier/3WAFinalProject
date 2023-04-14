@@ -94,6 +94,6 @@ public class PlayerFreeLookState : PlayerBaseState
 
     private void OnDash()
     {
-        stateMachine.SwitchState(new PlayerDashingState(stateMachine));
+        stateMachine.SwitchState(new PlayerDashingState(stateMachine, stateMachine.InputReader.MovementValue));
     }
 }

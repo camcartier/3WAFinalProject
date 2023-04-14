@@ -11,6 +11,7 @@ public class ForceReceiver : MonoBehaviour
 
     public Vector3 Movement => Vector3.up * verticalVelocity;
 
+    public Vector3 DashMove => new Vector3(1, 0, 1) * horizontalVelocity;
 
     private void Update()
     {
@@ -29,8 +30,15 @@ public class ForceReceiver : MonoBehaviour
         verticalVelocity += jumpForce;    
     }
 
+
+    public void DoubleJump(float doubleJumpForce)
+    {
+        verticalVelocity += doubleJumpForce;
+    }
+
+    /*
     public void Dash(float dashForce)
     {
         horizontalVelocity += dashForce;
-    }
+    }*/
 }
