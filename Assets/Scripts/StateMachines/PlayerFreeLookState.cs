@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerFreeLookState : PlayerBaseState
 {
-     
+    //public GameManager GameManager;
+
+
     Vector3 movement = new Vector3();
     private const float AnimatorDampTime = 0.1f;
 
@@ -16,6 +18,7 @@ public class PlayerFreeLookState : PlayerBaseState
 
     public PlayerFreeLookState(PlayerStateMachine stateMachine) : base(stateMachine) {}
 
+
     public override void Enter()
     {
         stateMachine.InputReader.JumpEvent += OnJump;
@@ -23,6 +26,8 @@ public class PlayerFreeLookState : PlayerBaseState
 
         stateMachine.InputReader.TargetEvent += OnTarget;
         stateMachine.InputReader.TargetEvent += OnCancel;
+
+        stateMachine.InputReader.UseEvent += OnUse;
 
         stateMachine.Animator.Play(FreeLookBlendTreeHash);
     }
@@ -54,9 +59,13 @@ public class PlayerFreeLookState : PlayerBaseState
 
         stateMachine.InputReader.TargetEvent -= OnTarget;
         stateMachine.InputReader.CancelEvent -= OnCancel;
-        //Debug.Log("exit");
+
+        stateMachine.InputReader.UseEvent -= OnUse;
+
     }
 
+    //old
+    
     private Vector3 CalculateMovement()
     {
         Vector3 forward = stateMachine.MainCameraTransform.forward;
@@ -76,6 +85,7 @@ public class PlayerFreeLookState : PlayerBaseState
             Quaternion.LookRotation(movement),
             deltaTime * stateMachine.RotationDamping);
     }
+    
 
     private void OnJump()
     {
@@ -94,6 +104,12 @@ public class PlayerFreeLookState : PlayerBaseState
 
     private void OnDash()
     {
-        stateMachine.SwitchState(new PlayerDashingState(stateMachine, stateMachine.InputReader.MovementValue));
+        stateMachine.SwitchState(new PlayerDashingState(stateMachine));
+        //stateMachine.SwitchState(new PlayerDashingState(stateMachine, stateMachine.InputReader.MovementValue));
+    }
+
+    private void OnUse()
+    {
+        stateMachine.SwitchState(new PlayerUsingSpellState(stateMachine));
     }
 }

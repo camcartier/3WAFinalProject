@@ -4,7 +4,9 @@ using UnityEngine;
 
 public abstract class PlayerBaseState : State
 {
+
     protected PlayerStateMachine stateMachine;
+
 
     public PlayerBaseState(PlayerStateMachine stateMachine)
     {
@@ -41,6 +43,30 @@ public abstract class PlayerBaseState : State
     }
 
 
+
+
+
+    /*
+    protected Vector3 CalculateMovement()
+    {
+        Vector3 forward = stateMachine.MainCameraTransform.forward;
+        Vector3 right = stateMachine.MainCameraTransform.right;
+
+        forward.y = 0; right.y = 0;
+
+        forward.Normalize(); right.Normalize();
+
+        return forward * stateMachine.InputReader.MovementValue.y + right * stateMachine.InputReader.MovementValue.x;
+    }
+
+    protected void FaceMovementDirection(Vector3 movement, float deltaTime)
+    {
+        stateMachine.transform.rotation = Quaternion.Lerp(
+            stateMachine.transform.rotation,
+            Quaternion.LookRotation(movement),
+            deltaTime * stateMachine.RotationDamping);
+    }
+    */
 
 
     #region testing

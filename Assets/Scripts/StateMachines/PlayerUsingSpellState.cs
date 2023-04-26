@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PlayerUsingSpellState : PlayerBaseState
 {
-    [SerializeField] GameManager GameManager;
 
-    [SerializeField] PlayerData PlayerData;
+
+    Vector3 movement = new Vector3();
+
 
     private readonly int UsingSpellHash = Animator.StringToHash("usingSpell");
     private const float CrossFadeDuration = 0.1f;
@@ -15,15 +16,33 @@ public class PlayerUsingSpellState : PlayerBaseState
 
     public override void Enter()
     {
-        GameManager._isUsingSpell = true;
+        Debug.Log("use");
 
-        stateMachine.Animator.CrossFadeInFixedTime(UsingSpellHash, CrossFadeDuration);
+        stateMachine.GameManager._isUsingSpell = true;
+        stateMachine.PlayerData._currentMana -= 1;
+
+        //stateMachine.Animator.CrossFadeInFixedTime(UsingSpellHash, CrossFadeDuration);
     }
+
     public override void Tick(float deltaTime)
     {
+        movement = CalculateMovement();
+
+        Move(movement * stateMachine._movementSpeed, deltaTime);
+
+        /*
+        if (stateMachine.InputReader.MovementValue == Vector2.zero)
+        {
+            stateMachine.Animator.SetFloat(FreeLookSpeedHash, 0, AnimatorDampTime, deltaTime);
+            return;
+        }
+        stateMachine.Animator.SetFloat(FreeLookSpeedHash, 1, AnimatorDampTime, deltaTime); */
 
 
-        if (PlayerData._currentMana <= 0)
+        FaceMovementDirection(movement, deltaTime);
+
+
+        if (stateMachine.PlayerData._currentMana <= 0)
         {
             stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
         }
@@ -31,6 +50,30 @@ public class PlayerUsingSpellState : PlayerBaseState
     }
     public override void Exit()
     {
-        GameManager._isUsingSpell = false;
+        stateMachine.GameManager._isUsingSpell = false;
+
     }
+
+
+    // a deplacer vers base state?
+    private Vector3 CalculateMovement()
+    {
+        Vector3 forward = stateMachine.MainCameraTransform.forward;
+        Vector3 right = stateMachine.MainCameraTransform.right;
+
+        forward.y = 0; right.y = 0;
+
+        forward.Normalize(); right.Normalize();
+
+        return forward * stateMachine.InputReader.MovementValue.y + right * stateMachine.InputReader.MovementValue.x;
+    }
+
+    private void FaceMovementDirection(Vector3 movement, float deltaTime)
+    {
+        stateMachine.transform.rotation = Quaternion.Lerp(
+            stateMachine.transform.rotation,
+            Quaternion.LookRotation(movement),
+            deltaTime * stateMachine.RotationDamping);
+    }
+
 }

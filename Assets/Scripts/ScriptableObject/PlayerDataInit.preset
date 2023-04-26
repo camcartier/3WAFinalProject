@@ -35,11 +35,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _maxMana
-    value: 30
+    value: 100
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _currentMana
-    value: 30
+    value: 100
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _spellPower

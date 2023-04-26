@@ -12,6 +12,8 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public ForceReceiver ForceReceiver { get; private set; }
 
     [field: SerializeField] public float _movementSpeed { get; private set; }
+    [field: SerializeField] public float _jumpForwardSpeed { get; private set; }
+    [field: SerializeField] public float _doubleJumpForwardSpeed { get; private set; }
     [field: SerializeField] public float JumpForce { get; private set; }
     [field: SerializeField] public float DoubleJumpForce { get; private set; }
 
@@ -19,7 +21,13 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public float DashDuration { get; private set; }
     [field: SerializeField] public float DashDistance { get; private set; }
 
+
     [field: SerializeField] public float RotationDamping { get; private set; }
+
+
+    [field: SerializeField] public PlayerData PlayerData { get; private set; }
+    [field: SerializeField] public GameManager GameManager { get; private set; }
+
 
     public Transform MainCameraTransform { get; private set; }
 

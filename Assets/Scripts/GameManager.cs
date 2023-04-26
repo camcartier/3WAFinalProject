@@ -15,7 +15,11 @@ public class GameManager : MonoBehaviour
     #region Pause
     public bool _gameIsPaused;
     public bool _gameIsPlaying;
-    [SerializeField] GameObject PausePanel; 
+    [SerializeField] GameObject PausePanel;
+    #endregion
+
+    #region Respawn
+    [SerializeField] GameObject RespawnPoint;
     #endregion
 
     #region Unlocks
@@ -31,10 +35,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] HealthSlider HealthSlider;
     #endregion
 
-    #region Stats
-    [SerializeField] PlayerData PlayerData;
-    #endregion
-
     #region Health&Mana
     private int _storedMana;
     private int _storedHealth;
@@ -42,12 +42,29 @@ public class GameManager : MonoBehaviour
 
     #region Spells
     public bool _isUsingSpell;
+    public bool _isPlayingFX;
     #endregion
+
+    #region FXs
+    private GameObject ManaParticles;
+    #endregion
+
+    #region PlayerInfo
+    [SerializeField] GameObject Player;
+    [SerializeField] PlayerData PlayerData;
+    #endregion
+
+    void Awake()
+    {
+        PlayerData._currentHealth = PlayerData._maxHealth;
+        PlayerData._currentMana = PlayerData._maxMana;
+    }
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        ManaParticles = GameObject.Find("UsingMana");
     }
 
     // Update is called once per frame
@@ -58,18 +75,37 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) && !_gameIsPaused)
         {
             PauseGame();
-            _gameIsPaused = true;
+            //_gameIsPaused = true;
         }
+        /*
         else if (Input.GetKeyDown(KeyCode.Escape) && _gameIsPaused)
         {
             ResumeGame();
-            _gameIsPaused = false;
+            //_gameIsPaused = false;
+        }*/
+
+        if (_isUsingSpell && !_isPlayingFX)
+        {
+            ManaParticles.SetActive(true);
+            _isPlayingFX = true;
         }
 
         if (_isUsingSpell && PlayerData._currentMana > 0)
         {
             PlayerData._currentMana -= 0.1f;
         }
+        if ( PlayerData._currentMana <= 0 || !_isUsingSpell)
+        {
+            ManaParticles.SetActive(false);
+        }
+        
+        if (!_isUsingSpell && PlayerData._currentMana < PlayerData._maxMana)
+        {
+            ManaParticles.SetActive(false);
+            PlayerData._currentMana += 0.1f;
+            Debug.Log(PlayerData._currentMana);
+        }
+
 
 
         /*
@@ -77,7 +113,27 @@ public class GameManager : MonoBehaviour
         {
 
         }*/
+
+        if (PlayerData._currentHealth <= 0)
+        {
+            DeathRespawn();
+        }
+
     }
+
+
+    public void DeathRespawn()
+    {
+        CharacterController CharaControls = Player.GetComponent<CharacterController>();
+        CharaControls.enabled = false;
+        
+        Vector3 RespawnPos = new Vector3(RespawnPoint.transform.position.x, RespawnPoint.transform.position.y, RespawnPoint.transform.position.z);
+        Player.transform.position = RespawnPos;
+
+        CharaControls.enabled = true;
+    }
+
+
 
     public void LevelUp()
     {
@@ -87,23 +143,33 @@ public class GameManager : MonoBehaviour
         HealthSlider.SetMaxHealth(PlayerData._maxHealth);
     }
 
+
+
     public void LoadNextScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     public void PauseGame()
     {
+        PausePanel.SetActive(true);
         Time.timeScale = 0f;
         _gameIsPaused = true;
+
     }
     public void ResumeGame()
     {
+        PausePanel.SetActive(false);
         Time.timeScale = 1f;
         _gameIsPaused = false;
+
     }
     public void QuitGame()
     {
         Application.Quit();
     }
+
+
+
+
 }
 

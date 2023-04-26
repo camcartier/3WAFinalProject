@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 20
   _currentHealth: 20
-  _maxMana: 30
-  _currentMana: 30
+  _maxMana: 100
+  _currentMana: 6.600932
   _spellPower: 1
   _movementSpeed: 1
   _dashLenght: 0.5
