@@ -6,9 +6,9 @@ using UnityEngine;
 public class PlayerData : ScriptableObject
 {
     [Header("Health&Mana")]
-    public int _maxHealth;
+    public float _maxHealth;
     public float _currentHealth;
-    public int _maxMana;
+    public float _maxMana;
     public float _currentMana;
     [Header("SpellPowers")]
     public int _spellPower;

@@ -5,10 +5,12 @@ using TMPro;
 
 public class PlayerIceAndLava : MonoBehaviour
 {
-    public float _iceCoyoteTime = 2f;
+    public float _iceCoyoteTime = 1.5f;
     private float _iceTimer;
-    public float _lavaCoyoteTime = 2f;
+    public float _lavaCoyoteTime = 1f;
     private float _lavaTimer;
+
+    [SerializeField] HealthSlider HealthSlider;
 
     [SerializeField] PlayerData PlayerData;
     [SerializeField] GameManager GameManager;
@@ -30,14 +32,14 @@ public class PlayerIceAndLava : MonoBehaviour
         {
             //Debug.Log("freezing!");
             _messageTXT.text = ("you are freezing!");
-            PlayerData._currentHealth -= 0.03f;
+            PlayerData._currentHealth -= 0.01f;
         }
 
         if (_lavaTimer > _lavaCoyoteTime)
         {
             //Debug.Log("burning!");
             _messageTXT.text = ("you are burning!");
-            PlayerData._currentHealth -= 0.07f;
+            PlayerData._currentHealth -= 0.05f;
         }
     }
 
@@ -46,13 +48,13 @@ public class PlayerIceAndLava : MonoBehaviour
         if (other.CompareTag("Ice"))
         {
             MessagePanel.SetActive(true);
-            _messageTXT.text = ("it's too cold");
+            _messageTXT.text = ("it's cold.");
             //Debug.Log("it's too cold");
         }
         if (other.CompareTag("Lava"))
         {
             MessagePanel.SetActive(true);
-            _messageTXT.text = ("it's too hot");
+            _messageTXT.text = ("it's too hot to walk here.");
             //Debug.Log("it's too hot");
         }
     }

@@ -18,8 +18,10 @@ public class PlayerUsingSpellState : PlayerBaseState
     {
         Debug.Log("use");
 
+        stateMachine.InputReader.UseEvent += OnUse;
+
         stateMachine.GameManager._isUsingSpell = true;
-        stateMachine.PlayerData._currentMana -= 1;
+        stateMachine.PlayerData._currentMana -= 0.5f;
 
         //stateMachine.Animator.CrossFadeInFixedTime(UsingSpellHash, CrossFadeDuration);
     }
@@ -42,16 +44,21 @@ public class PlayerUsingSpellState : PlayerBaseState
         FaceMovementDirection(movement, deltaTime);
 
 
+
+
         if (stateMachine.PlayerData._currentMana <= 0)
         {
             stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
         }
         
+
     }
+
     public override void Exit()
     {
         stateMachine.GameManager._isUsingSpell = false;
 
+        stateMachine.InputReader.UseEvent -= OnUse;
     }
 
 
@@ -74,6 +81,11 @@ public class PlayerUsingSpellState : PlayerBaseState
             stateMachine.transform.rotation,
             Quaternion.LookRotation(movement),
             deltaTime * stateMachine.RotationDamping);
+    }
+
+    private void OnUse()
+    {
+        stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
     }
 
 }

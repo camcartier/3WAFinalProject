@@ -36,6 +36,13 @@ public class ForceReceiver : MonoBehaviour
         verticalVelocity += doubleJumpForce;
     }
 
+    public void Reset()
+    {
+        // impact = Vector3.zero;
+        verticalVelocity = 0f;  
+
+    }
+
     /*
     public void Dash(float dashForce)
     {

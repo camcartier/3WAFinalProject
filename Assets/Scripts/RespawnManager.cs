@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RespawnManager : MonoBehaviour
 {
+    public List<Transform> respawnPointList = new List<Transform>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +16,13 @@ public class RespawnManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("respawnPoint"))
+        {
+            respawnPointList.Add(other.transform);
+        }
     }
 }

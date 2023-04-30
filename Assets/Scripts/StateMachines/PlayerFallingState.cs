@@ -23,6 +23,7 @@ public class PlayerFallingState : PlayerBaseState
         //momentum.y = 0;
 
         stateMachine.InputReader.DashEvent += OnDash;
+        stateMachine.LedgeDetector.OnLedgeDetect += HandleLedgeDetect;
 
         stateMachine.Animator.CrossFadeInFixedTime(FallHash, CrossFadeDuration);
     }
@@ -50,6 +51,7 @@ public class PlayerFallingState : PlayerBaseState
     public override void Exit()
     {
         stateMachine.InputReader.DashEvent -= OnDash;
+        stateMachine.LedgeDetector.OnLedgeDetect -= HandleLedgeDetect;
 
     }
 
@@ -62,6 +64,13 @@ public class PlayerFallingState : PlayerBaseState
     {
         stateMachine.SwitchState(new PlayerDashingState(stateMachine));
     }
+
+
+    private void HandleLedgeDetect(Vector3 closestPoint, Vector3 ledgeForward)
+    {
+        stateMachine.SwitchState(new PlayerHangingState(stateMachine, closestPoint, ledgeForward));
+    }
+
 
 
     private Vector3 CalculateMovement()

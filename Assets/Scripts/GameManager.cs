@@ -36,8 +36,10 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Health&Mana
-    private int _storedMana;
-    private int _storedHealth;
+    private float _storedMana;
+    private float _storedHealth;
+    private float _manaRegenTimer = 2f;
+    private float _manaRegenCounter;
     #endregion
 
     #region Spells
@@ -58,6 +60,8 @@ public class GameManager : MonoBehaviour
     {
         PlayerData._currentHealth = PlayerData._maxHealth;
         PlayerData._currentMana = PlayerData._maxMana;
+        _storedHealth = PlayerData._maxHealth;
+        _storedMana = PlayerData._maxMana;
     }
 
 
@@ -93,6 +97,7 @@ public class GameManager : MonoBehaviour
         if (_isUsingSpell && PlayerData._currentMana > 0)
         {
             PlayerData._currentMana -= 0.1f;
+            ManaSlider.SetMana(PlayerData._currentMana);
         }
         if ( PlayerData._currentMana <= 0 || !_isUsingSpell)
         {
@@ -104,9 +109,32 @@ public class GameManager : MonoBehaviour
             ManaParticles.SetActive(false);
             PlayerData._currentMana += 0.1f;
             Debug.Log(PlayerData._currentMana);
+            ManaSlider.SetMana(PlayerData._currentMana);
         }
 
+        if (_storedHealth == PlayerData._currentHealth)
+        {
+            return;
+        }
+        else { HealthSlider.SetHealth(PlayerData._currentHealth);  }
+        if (_storedMana == PlayerData._currentMana)
+        {
+            return;
+        }
+        else { ManaSlider.SetMana(PlayerData._currentMana); }
 
+
+        if (!_isUsingSpell && _manaRegenCounter > _manaRegenTimer)
+        {
+            Debug.Log("Regen Mana");
+            PlayerData._currentMana += 0.05f;
+        }
+
+        if (PlayerData._currentMana <= 0 || !_isUsingSpell)
+        {
+            Debug.Log(PlayerData._currentMana);
+            _manaRegenTimer += Time.deltaTime;
+        }
 
         /*
         if ()

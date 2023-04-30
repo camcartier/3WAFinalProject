@@ -37,6 +37,8 @@ public class PlayerJumpingState : PlayerBaseState
 
         stateMachine.InputReader.JumpEvent += OnJump;
         stateMachine.InputReader.DashEvent += OnDash;
+
+        stateMachine.LedgeDetector.OnLedgeDetect += HandleLedgeDetect;
     }
     public override void Tick(float deltaTime)
     {
@@ -58,6 +60,8 @@ public class PlayerJumpingState : PlayerBaseState
     {
         stateMachine.InputReader.JumpEvent -= OnJump;
         stateMachine.InputReader.DashEvent -= OnDash;
+
+        stateMachine.LedgeDetector.OnLedgeDetect -= HandleLedgeDetect;
 
         //Debug.Log(momentum + "number 2 ");
     }
@@ -81,6 +85,12 @@ public class PlayerJumpingState : PlayerBaseState
     {
         stateMachine.SwitchState(new PlayerDashingState(stateMachine));
     }
+
+    private void HandleLedgeDetect(Vector3 closestPoint, Vector3 ledgeForward)
+    {
+        stateMachine.SwitchState(new PlayerHangingState(stateMachine, closestPoint, ledgeForward));
+    }
+
 
     private Vector3 CalculateMovement()
     {
