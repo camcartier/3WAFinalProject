@@ -293,7 +293,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Controls
+  m_text: Load Game
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -19557,12 +19557,12 @@ PrefabInstance:
     - target: {fileID: 1872737854690022584, guid: 60529e7747572764c8c0a22af8997afd,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.28126186
+      value: -0.2812619
       objectReference: {fileID: 0}
     - target: {fileID: 1872737854690022584, guid: 60529e7747572764c8c0a22af8997afd,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.12499618
+      value: 0.12499617
       objectReference: {fileID: 0}
     - target: {fileID: 2200471203851782304, guid: 60529e7747572764c8c0a22af8997afd,
         type: 3}
@@ -19692,22 +19692,22 @@ PrefabInstance:
     - target: {fileID: 8931112585218577740, guid: 60529e7747572764c8c0a22af8997afd,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.92541987
+      value: 0.9254199
       objectReference: {fileID: 0}
     - target: {fileID: 8931112585218577740, guid: 60529e7747572764c8c0a22af8997afd,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.22744803
+      value: -0.22744808
       objectReference: {fileID: 0}
     - target: {fileID: 8931112585218577740, guid: 60529e7747572764c8c0a22af8997afd,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.28259704
+      value: -0.282597
       objectReference: {fileID: 0}
     - target: {fileID: 8931112585218577740, guid: 60529e7747572764c8c0a22af8997afd,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.10956471
+      value: 0.1095647
       objectReference: {fileID: 0}
     - target: {fileID: 9216741580585515210, guid: 60529e7747572764c8c0a22af8997afd,
         type: 3}
@@ -20866,7 +20866,7 @@ GameObject:
   - component: {fileID: 1550252678}
   - component: {fileID: 1550252677}
   m_Layer: 5
-  m_Name: ControlsButton
+  m_Name: LoadGameButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21613,7 +21613,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 647f30c566c65e840bff113225daba13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _menuBackgroundMusic: {fileID: 0}
   _meadowBackgroundMusic: {fileID: 0}
   _gameIsPaused: 0
   _gameIsPlaying: 0

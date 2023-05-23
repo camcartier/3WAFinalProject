@@ -28,6 +28,12 @@ public class DialogueManager : MonoBehaviour
         holderArray = FindObjectsOfType<DialogueTrigger>();
     }
 
+    /*
+    public void OnEnable()
+    {
+        StartDialogue(dialogue);
+    }*/
+
     public void StartDialogue(Dialogue dialogue)
     {
         //Debug.Log("starting conversation with " + dialogue.name);

@@ -5,6 +5,11 @@ using UnityEngine;
 [CreateAssetMenu]
 public class PlayerData : ScriptableObject
 {
+    [Header("PlayerSpecificInfo")]
+    public string _name;
+    public Vector3 _currentPosition;
+    public int _currentSceneIndex; 
+
     [Header("Health&Mana")]
     public float _maxHealth;
     public float _currentHealth;

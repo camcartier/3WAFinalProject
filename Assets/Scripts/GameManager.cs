@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     #region Sound
-    [SerializeField] AudioSource _menuBackgroundMusic;
     [SerializeField] AudioSource _meadowBackgroundMusic;
     #endregion
 
@@ -56,12 +55,18 @@ public class GameManager : MonoBehaviour
     [SerializeField] PlayerData PlayerData;
     #endregion
 
+    #region SAVE&LOAD
+    private PlayerCurrentInfo playerCurrentInfo;
+    #endregion
+
     void Awake()
     {
         PlayerData._currentHealth = PlayerData._maxHealth;
         PlayerData._currentMana = PlayerData._maxMana;
         _storedHealth = PlayerData._maxHealth;
         _storedMana = PlayerData._maxMana;
+
+        playerCurrentInfo = FindObjectOfType<PlayerCurrentInfo>();
     }
 
 
@@ -76,10 +81,10 @@ public class GameManager : MonoBehaviour
     {
 
 
-        if (Input.GetKeyDown(KeyCode.Escape) && !_gameIsPaused)
+        if (Input.GetKeyDown(KeyCode.Escape) && !_gameIsPaused && SceneManager.GetActiveScene().buildIndex!=0)
         {
             PauseGame();
-            //_gameIsPaused = true;
+            _gameIsPaused = true;
         }
         /*
         else if (Input.GetKeyDown(KeyCode.Escape) && _gameIsPaused)
@@ -136,11 +141,6 @@ public class GameManager : MonoBehaviour
             _manaRegenTimer += Time.deltaTime;
         }
 
-        /*
-        if ()
-        {
-
-        }*/
 
         if (PlayerData._currentHealth <= 0)
         {
@@ -197,7 +197,30 @@ public class GameManager : MonoBehaviour
     }
 
 
+    //save management
+    #region SAVE&LOAD
 
+    public void SavePlayer()
+    {
+        SaveSystem.SavePlayer(playerCurrentInfo);
+    }
+
+    public void LoadPlayer()
+    {
+        SaveData data = SaveSystem.LoadPlayer();
+
+        playerCurrentInfo.currentSceneIndex = data.sceneIndex;
+        playerCurrentInfo.playerName = data.playerName;
+
+        Vector3 position;
+        position.x = data.position[0];
+        position.y = data.position[1];
+        position.z = data.position[2];
+        
+        transform.position = position;
+
+    }
+    #endregion
 
 }
 

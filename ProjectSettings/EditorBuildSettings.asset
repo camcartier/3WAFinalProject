@@ -9,15 +9,21 @@ EditorBuildSettings:
     path: Assets/Scenes/StartMenuScene.unity
     guid: a39ddc39d2c4a574b8edb236c7c50f89
   - enabled: 1
-    path: Assets/Scenes/TestScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
-    path: Assets/Scenes/ContinueScene.unity
-    guid: 0135e742a4d456a4e9af95bc43aa8466
-  - enabled: 1
     path: Assets/Scenes/CutScene1.unity
     guid: e47834949ceafca47a8233a3f0ff2a01
   - enabled: 1
     path: Assets/Scenes/IntroDialogue.unity
     guid: acbabed283c424c4eb4cc7d919ef581a
+  - enabled: 1
+    path: Assets/Scenes/Level_1.unity
+    guid: bb6c9f635f2c35a449dce14c55f13e8a
+  - enabled: 1
+    path: Assets/Scenes/Level_3.unity
+    guid: 8b8b686727ad42b44ba8886d1e9ad851
+  - enabled: 1
+    path: Assets/Scenes/TestScene.unity
+    guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/ContinueScene.unity
+    guid: 0135e742a4d456a4e9af95bc43aa8466
   m_configObjects: {}
