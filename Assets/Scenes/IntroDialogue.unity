@@ -1051,7 +1051,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1483111410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1076,7 +1076,7 @@ MonoBehaviour:
     - This place is a trial run so to say. You'll know if you are ready for the adventure
       when you reach the final portal.
     - Good luck!
-  dialogueManager: {fileID: 0}
+  dialogueManager: {fileID: 273540821}
 --- !u!4 &1483111411
 Transform:
   m_ObjectHideFlags: 0

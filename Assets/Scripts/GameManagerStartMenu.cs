@@ -18,13 +18,21 @@ public class GameManagerStartMenu : MonoBehaviour
     public bool _hasSword;
     #endregion
 
-
     #region PlayerInfo
     [SerializeField] PlayerData PlayerData;
     #endregion
 
     #region SAVE&LOAD
     private PlayerCurrentInfo playerCurrentInfo;
+    #endregion
+
+    #region Menus
+    [SerializeField] GameObject MainPanel;
+    [SerializeField] GameObject NewGamePanel;
+    [SerializeField] Animator TextZoneAnimator;
+    [SerializeField] Animator TitlePanelAnimator;
+    [SerializeField] Animator NewGamePanelAnimator;
+    //private bool _isOverScene;
     #endregion
 
     void Awake()
@@ -41,7 +49,13 @@ public class GameManagerStartMenu : MonoBehaviour
 
     void Update()
     {
-
+        /*
+        if (_isOverScene)
+        {
+            TextZoneAnimator.SetBool("fade", true);
+        }
+        else { TextZoneAnimator.SetBool("fade", false); }
+        */
     }
 
 
@@ -53,6 +67,31 @@ public class GameManagerStartMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void HidePreviousPanel()
+    {
+        //MainPanel.SetActive(false);
+        NewGamePanel.SetActive(true);
+
+        TitlePanelAnimator.SetBool("fade", true);
+        NewGamePanelAnimator.SetBool("fade", true);
+        TextZoneAnimator.SetBool("fadein", true);
+    }
+
+    public void SetTXTAnimator()
+    {
+        TextZoneAnimator.SetBool("fade", true);
+    }
+    public void WrapCoroutineLoadNext()
+    {
+        StartCoroutine(LoadNextSceneAfterTime());
+    }
+
+    public IEnumerator LoadNextSceneAfterTime()
+    {
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
 

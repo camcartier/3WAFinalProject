@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TextInterract : MonoBehaviour
 {
-    [SerializeField] GameObject InterractPanel;
+    [SerializeField] GameObject DialoguePanel;
 
     private void OnTriggerEnter (Collider other)
     {
@@ -13,4 +13,6 @@ public class TextInterract : MonoBehaviour
             Debug.Log("interractable");
         }
     }
+
+
 }

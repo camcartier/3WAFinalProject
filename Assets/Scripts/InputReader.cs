@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class InputReader : MonoBehaviour, Controls.IMainActions
 {
-    private Controls controls;
+    public Controls controls;
 
     public event Action JumpEvent, DashEvent, UseEvent, AttackEvent, TargetEvent, CancelEvent;
 

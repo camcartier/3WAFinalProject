@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region FXs
-    private GameObject ManaParticles;
+    [SerializeField] GameObject ManaParticles;
     #endregion
 
     #region PlayerInfo
@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ManaParticles = GameObject.Find("UsingMana");
+
     }
 
     // Update is called once per frame

@@ -9,6 +9,7 @@ TagManager:
   - Ledge
   - Interractable
   - Water
+  - Cinematic
   layers:
   - Default
   - TransparentFX
