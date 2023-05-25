@@ -86,9 +86,9 @@ public class PlayerJumpingState : PlayerBaseState
         stateMachine.SwitchState(new PlayerDashingState(stateMachine));
     }
 
-    private void HandleLedgeDetect(Vector3 closestPoint, Vector3 ledgeForward)
+    private void HandleLedgeDetect(Vector3 ledgeForward)
     {
-        stateMachine.SwitchState(new PlayerHangingState(stateMachine, closestPoint, ledgeForward));
+        stateMachine.SwitchState(new PlayerHangingState(stateMachine, ledgeForward));
     }
 
 

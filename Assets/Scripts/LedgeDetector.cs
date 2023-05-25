@@ -5,7 +5,7 @@ using System;
 
 public class LedgeDetector : MonoBehaviour
 {
-    public event Action<Vector3, Vector3> OnLedgeDetect;
+    public event Action<Vector3> OnLedgeDetect;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -13,6 +13,6 @@ public class LedgeDetector : MonoBehaviour
         //transform.position is of the hand
         //second parameter is direction the ledge is facing in
 
-        OnLedgeDetect?.Invoke(other.ClosestPoint(transform.position), other.transform.forward);
+        OnLedgeDetect?.Invoke(other.transform.forward);
     }
 }

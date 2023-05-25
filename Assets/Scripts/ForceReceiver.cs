@@ -38,7 +38,7 @@ public class ForceReceiver : MonoBehaviour
 
     public void Reset()
     {
-        // impact = Vector3.zero;
+        //impact = Vector3.zero;
         verticalVelocity = 0f;  
 
     }
