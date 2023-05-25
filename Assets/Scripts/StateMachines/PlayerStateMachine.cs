@@ -12,6 +12,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public ForceReceiver ForceReceiver { get; private set; }
 
     [field: SerializeField] public LedgeDetector LedgeDetector { get; private set; }
+    [field: SerializeField] public GameObject HangingPanel { get; private set; }
 
     [field: SerializeField] public float _movementSpeed { get; private set; }
     [field: SerializeField] public float _jumpForwardSpeed { get; private set; }

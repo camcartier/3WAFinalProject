@@ -22,6 +22,7 @@ public class PlayerHangingState : PlayerBaseState
     {
         Debug.Log("ledge");
         Debug.Log("I entered hanging state");
+        stateMachine.HangingPanel.SetActive(true);
         /*
         momentum = stateMachine.Controller.velocity;
         momentum.y = 0;
@@ -30,7 +31,6 @@ public class PlayerHangingState : PlayerBaseState
         */
         CharacterController = stateMachine.Controller;
         CharacterController.enabled = false;
-
         stateMachine.ForceReceiver.Reset();
 
         stateMachine.transform.rotation = Quaternion.LookRotation(ledgeForward, Vector3.up);
@@ -38,18 +38,27 @@ public class PlayerHangingState : PlayerBaseState
         stateMachine.Animator.CrossFadeInFixedTime(HangingHash, CrossFadeDuration);
     }
     public override void Tick(float deltaTime)
-    {   
-        
-        if (stateMachine.InputReader.MovementValue.y < 0f)
+    {
+        if (stateMachine.InputReader.MovementValue.y > 0f)
+        {
+            //stateMachine.Controller.Move(Vector3.zero);
+            //stateMachine.ForceReceiver.Reset();
+            stateMachine.SwitchState(new PlayerPullUpState(stateMachine));
+        }
+        else if (stateMachine.InputReader.MovementValue.y < 0f)
         {
             stateMachine.Controller.Move(Vector3.zero);
             stateMachine.ForceReceiver.Reset();
             stateMachine.SwitchState(new PlayerFallingState(stateMachine));
         }
-        
+
+
+
+
     }
     public override void Exit()
     {
         CharacterController.enabled = true;
+        stateMachine.HangingPanel.SetActive(false);
     }
 }

@@ -8,7 +8,9 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     #region Sound
-    [SerializeField] AudioSource _meadowBackgroundMusic;
+    [SerializeField] AudioSource meadowBackgroundMusic;
+    [SerializeField] AudioSource darkAmbientTheWander;
+    [SerializeField] AudioSource stepsDefault;
     #endregion
 
     #region Pause

@@ -29,9 +29,14 @@ public class GameManagerStartMenu : MonoBehaviour
     #region Menus
     [SerializeField] GameObject MainPanel;
     [SerializeField] GameObject NewGamePanel;
+    [SerializeField] GameObject EscapePanel;
     [SerializeField] Animator TextZoneAnimator;
     [SerializeField] Animator TitlePanelAnimator;
     [SerializeField] Animator NewGamePanelAnimator;
+    [SerializeField] Animator EscapePanelAnimator;
+    private bool _newGameMenuOn;
+    private float LerpDuration = 180f;
+    private float timeElapsed;
     //private bool _isOverScene;
     #endregion
 
@@ -56,6 +61,20 @@ public class GameManagerStartMenu : MonoBehaviour
         }
         else { TextZoneAnimator.SetBool("fade", false); }
         */
+
+        if (_newGameMenuOn)
+        {
+            if (timeElapsed < LerpDuration)
+            {
+                _menuBackgroundMusic.volume = Mathf.Lerp(_menuBackgroundMusic.volume, 0.15f, timeElapsed/LerpDuration);
+                timeElapsed += Time.deltaTime;
+            }
+            else
+            {
+                _menuBackgroundMusic.volume = 0.15f;
+            }
+            
+        }
     }
 
 
@@ -73,15 +92,20 @@ public class GameManagerStartMenu : MonoBehaviour
     {
         //MainPanel.SetActive(false);
         NewGamePanel.SetActive(true);
+        EscapePanel.SetActive(true);
+        _newGameMenuOn = true;
+
 
         TitlePanelAnimator.SetBool("fade", true);
         NewGamePanelAnimator.SetBool("fade", true);
         TextZoneAnimator.SetBool("fadein", true);
+        EscapePanelAnimator.SetBool("fadein", true);
     }
 
     public void SetTXTAnimator()
     {
         TextZoneAnimator.SetBool("fade", true);
+        EscapePanelAnimator.SetBool("fadeout", true);
     }
     public void WrapCoroutineLoadNext()
     {
