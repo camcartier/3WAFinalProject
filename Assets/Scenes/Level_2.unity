@@ -3138,6 +3138,8 @@ MonoBehaviour:
   ManaParticles: {fileID: 253155129}
   Player: {fileID: 1371793067}
   PlayerData: {fileID: 11400000, guid: 155250aef4a7b4047a5575751ef4ee8f, type: 2}
+  _canTakeDamage: 0
+  _isDashing: 0
 --- !u!4 &655790089
 Transform:
   m_ObjectHideFlags: 0
@@ -7708,6 +7710,7 @@ MonoBehaviour:
   CharacterController: {fileID: 1371793076}
   Player: {fileID: 1371793067}
   RespawnPoint: {fileID: 1644222990}
+  PlayerData: {fileID: 11400000, guid: 155250aef4a7b4047a5575751ef4ee8f, type: 2}
 --- !u!65 &1728171306
 BoxCollider:
   m_ObjectHideFlags: 0

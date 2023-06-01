@@ -72,6 +72,9 @@ public class GameManager : MonoBehaviour
     private PlayerCurrentInfo playerCurrentInfo;
     #endregion
 
+    public bool _canTakeDamage;
+    public bool _isDashing;
+
     void Awake()
     {
         PlayerData._currentHealth = PlayerData._maxHealth;
@@ -87,7 +90,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         BuildIndex = SceneManager.GetActiveScene().buildIndex;
-        //Debug.Log(BuildIndex);
     }
 
     // Update is called once per frame
@@ -113,7 +115,6 @@ public class GameManager : MonoBehaviour
 
         if (MessagePanel.activeSelf == true)
         {
-            //Debug.Log("ayo");
             messageTimer += Time.deltaTime;
         }
         if (messageTimer < messageScreenTime)
@@ -123,21 +124,14 @@ public class GameManager : MonoBehaviour
         else { MessagePanel.SetActive(false); messageTimer = 0f; }
 
 
-        /*
-        if (Input.GetKeyDown(KeyCode.Escape) && !_gameIsPaused && SceneManager.GetActiveScene().buildIndex != 0)
+        if (_isDashing)
         {
-            Debug.Log("pause");
-            PauseGame();
-            _gameIsPaused = true;
+            _canTakeDamage = false;
+            Debug.Log(_canTakeDamage);
         }
-        */
+        else { _canTakeDamage = true; Debug.Log(_canTakeDamage); }
 
-        /*
-        else if (Input.GetKeyDown(KeyCode.Escape) && _gameIsPaused)
-        {
-            ResumeGame();
-            //_gameIsPaused = false;
-        }*/
+
 
         if (_isUsingSpell && !_isPlayingFX)
         {
@@ -187,13 +181,6 @@ public class GameManager : MonoBehaviour
         }
         #endregion
 
-        /*
-        if (PlayerData._currentHealth <= 0)
-        {
-            Debug.Log("0 HP");
-            DeathRespawn();
-        }
-        */
 
     }
 

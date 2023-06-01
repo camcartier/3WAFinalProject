@@ -46,6 +46,7 @@ public class PlayerDashingState : PlayerBaseState
         //momentum = stateMachine.Controller.velocity;
         //momentum.y = 0;
 
+        stateMachine.GameManager._isDashing = true;
 
         remainingDashTime = stateMachine.DashDuration;
 
@@ -91,7 +92,7 @@ public class PlayerDashingState : PlayerBaseState
 
     public override void Exit()
     {
-
+        stateMachine.GameManager._isDashing = false;
     }
 
     private Vector3 CalculateMovement()

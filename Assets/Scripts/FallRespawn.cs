@@ -7,6 +7,7 @@ public class FallRespawn : MonoBehaviour
     [SerializeField] CharacterController CharacterController;
     [SerializeField] GameObject Player;
     [SerializeField] GameObject RespawnPoint;
+    [SerializeField] PlayerData PlayerData;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,6 +20,8 @@ public class FallRespawn : MonoBehaviour
             Player.transform.position = RespawnPos;
 
             CharacterController.enabled = true;
+
+            PlayerData._currentHealth = PlayerData._maxHealth;
         }
     }
 }

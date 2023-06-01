@@ -30,16 +30,26 @@ public class PlayerIceAndLava : MonoBehaviour
     {
         if (_iceTimer > _iceCoyoteTime)
         {
+            if (GameManager._canTakeDamage)
+            {
+                PlayerData._currentHealth -= 0.01f;
+                HealthSlider.SetHealth(PlayerData._currentHealth);
+            }
             //Debug.Log("freezing!");
             _messageTXT.text = ("you are freezing!");
-            PlayerData._currentHealth -= 0.01f;
+            
         }
 
         if (_lavaTimer > _lavaCoyoteTime)
         {
+            if (GameManager._canTakeDamage)
+            {
+                PlayerData._currentHealth -= 0.1f; ;
+                HealthSlider.SetHealth(PlayerData._currentHealth);
+            }
             //Debug.Log("burning!");
             _messageTXT.text = ("you are burning!");
-            PlayerData._currentHealth -= 0.1f;
+
         }
     }
 
@@ -63,13 +73,11 @@ public class PlayerIceAndLava : MonoBehaviour
     {
         if (other.CompareTag("Ice"))
         {
-            
             _iceTimer += Time.deltaTime;
         }
 
         if (other.CompareTag("Lava"))
         {
-            
             _lavaTimer += Time.deltaTime;
         }
     }
@@ -80,14 +88,15 @@ public class PlayerIceAndLava : MonoBehaviour
         {
             MessagePanel.SetActive(false);
             _iceTimer = 0f;
-            //Debug.Log(" iced over ");
+            Debug.Log("exit");
+            
         }
 
         if (other.CompareTag("Lava"))
         {
             MessagePanel.SetActive(false);
             _lavaTimer = 0f;
-            //Debug.Log(" toasted out ");
+            Debug.Log("exit");
         }
     }
 }
