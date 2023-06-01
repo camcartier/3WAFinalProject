@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour
 
         if (MessagePanel.activeSelf == true)
         {
-            Debug.Log("ayo");
+            //Debug.Log("ayo");
             messageTimer += Time.deltaTime;
         }
         if (messageTimer < messageScreenTime)
@@ -189,6 +189,7 @@ public class GameManager : MonoBehaviour
 
         if (PlayerData._currentHealth <= 0)
         {
+            Debug.Log("0 HP");
             DeathRespawn();
         }
 

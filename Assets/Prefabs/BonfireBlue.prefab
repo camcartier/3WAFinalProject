@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 5758579865503303870}
   - component: {fileID: 4780434168735174878}
   - component: {fileID: 4780434168735174865}
+  - component: {fileID: 5764059834974642488}
   m_Layer: 0
   m_Name: BonfireBlue
-  m_TagString: Untagged
+  m_TagString: Lava
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4813,3 +4814,17 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!136 &5764059834974642488
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7801204795535173646}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 4.11
+  m_Height: 17.069391
+  m_Direction: 2
+  m_Center: {x: -0.040935516, y: -0.029278755, z: 7.8246965}
