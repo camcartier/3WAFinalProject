@@ -32,15 +32,13 @@ public class PlayerDashingState : PlayerBaseState
 
 
     public PlayerDashingState(PlayerStateMachine stateMachine) : base(stateMachine)
-    {
-
-        
+    { 
     }
 
 
     public override void Enter()
     {
-        Debug.Log("dash");
+        //Debug.Log("dash");
 
 
         //DashingDirectionInput = stateMachine.InputReader.MovementValue;
@@ -55,9 +53,9 @@ public class PlayerDashingState : PlayerBaseState
     }
     public override void Tick(float deltaTime)
     {
+
         //Vector3 movement = new Vector3();
 
-        //cc working
         Vector3 movement = CalculateMovement();
 
         //movement += stateMachine.transform.right * dashingDirectionInput.x * stateMachine.DashDistance / stateMachine.DashDuration;

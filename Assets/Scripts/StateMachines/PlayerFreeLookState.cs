@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerFreeLookState : PlayerBaseState
 {
     //public GameManager GameManager;
-
+    private float dashingCooldown = 2f;
+    private float dashingCooldownCounter = 2f;
 
     Vector3 movement = new Vector3();
     private const float AnimatorDampTime = 0.1f;
@@ -24,7 +26,7 @@ public class PlayerFreeLookState : PlayerBaseState
         stateMachine.InputReader.JumpEvent += OnJump;
         stateMachine.InputReader.DashEvent += OnDash;
 
-        stateMachine.InputReader.TargetEvent += OnTarget;
+        //stateMachine.InputReader.TargetEvent += OnTarget;
         stateMachine.InputReader.TargetEvent += OnCancel;
 
         stateMachine.InputReader.UseEvent += OnUse;
@@ -46,9 +48,11 @@ public class PlayerFreeLookState : PlayerBaseState
         if (stateMachine.InputReader.MovementValue == Vector2.zero)
         {
             stateMachine.Animator.SetFloat(FreeLookSpeedHash, 0, AnimatorDampTime, deltaTime);
+            stateMachine.GameManager.stepsDefault.Play();
             return;
         }
         stateMachine.Animator.SetFloat(FreeLookSpeedHash, 1, AnimatorDampTime, deltaTime);
+        
 
         FaceMovementDirection(movement, deltaTime);
     }
@@ -57,11 +61,12 @@ public class PlayerFreeLookState : PlayerBaseState
         stateMachine.InputReader.JumpEvent -= OnJump;
         stateMachine.InputReader.DashEvent -= OnDash;
 
-        stateMachine.InputReader.TargetEvent -= OnTarget;
+        //stateMachine.InputReader.TargetEvent -= OnTarget;
         stateMachine.InputReader.CancelEvent -= OnCancel;
 
         stateMachine.InputReader.UseEvent -= OnUse;
 
+        stateMachine.GameManager.stepsDefault.Stop();
     }
 
     //old
@@ -92,11 +97,13 @@ public class PlayerFreeLookState : PlayerBaseState
         stateMachine.SwitchState(new PlayerJumpingState(stateMachine));
     }
 
+    /*
     private void OnTarget()
     {
         if (!stateMachine.Targeter.SelectTarget()) { return; }
         stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
-    }
+    }*/
+
     private void OnCancel()
     {
         stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
@@ -104,6 +111,14 @@ public class PlayerFreeLookState : PlayerBaseState
 
     private void OnDash()
     {
+        if (!stateMachine.GameManager._canDash)
+        {
+            Debug.Log("can't dash yet :-)");
+            stateMachine.GameManager.MessagePanel.SetActive(true);
+            stateMachine.GameManager.MessagePanel.GetComponentInChildren<TextMeshProUGUI>().text = ("can't dash yet :-)");
+            return;
+        }
+
         stateMachine.SwitchState(new PlayerDashingState(stateMachine));
         //stateMachine.SwitchState(new PlayerDashingState(stateMachine, stateMachine.InputReader.MovementValue));
     }

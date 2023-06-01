@@ -18,6 +18,10 @@ public class DialogueManager : MonoBehaviour
 
     private DialogueTrigger[] holderArray;
 
+    void Awake()
+    {
+        holderArray = FindObjectsOfType<DialogueTrigger>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +29,6 @@ public class DialogueManager : MonoBehaviour
         sentences = new Queue<string>();
         name = new Queue<string>();
 
-        holderArray = FindObjectsOfType<DialogueTrigger>();
     }
 
 

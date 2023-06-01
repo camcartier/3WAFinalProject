@@ -7,10 +7,18 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    #region Infos
+    private Scene scene;
+    private int BuildIndex;
+    public GameObject MessagePanel;
+    private float messageScreenTime = 2f;
+    private float messageTimer;
+    #endregion
+
     #region Sound
     [SerializeField] AudioSource meadowBackgroundMusic;
     [SerializeField] AudioSource darkAmbientTheWander;
-    [SerializeField] AudioSource stepsDefault;
+    public AudioSource stepsDefault;
     #endregion
 
     #region Pause
@@ -29,6 +37,9 @@ public class GameManager : MonoBehaviour
     public bool _hasBoots;
     public bool _hasCape;
     public bool _hasSword;
+
+    public bool _canDash;
+    public bool _canUseMagic;
     #endregion
 
     #region Sliders
@@ -75,19 +86,52 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        BuildIndex = SceneManager.GetActiveScene().buildIndex;
+        Debug.Log(BuildIndex);
     }
 
     // Update is called once per frame
     void Update()
     {
-
-
-        if (Input.GetKeyDown(KeyCode.Escape) && !_gameIsPaused && SceneManager.GetActiveScene().buildIndex!=0)
+        if (BuildIndex > 3)
         {
+            _canDash= true;
+        }
+        if (BuildIndex > 4)
+        {
+            _canUseMagic= true;
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Debug.Log("pause");
             PauseGame();
             _gameIsPaused = true;
         }
+
+
+        if (MessagePanel.activeSelf == true)
+        {
+            Debug.Log("ayo");
+            messageTimer += Time.deltaTime;
+        }
+        if (messageTimer < messageScreenTime)
+        {
+            return;
+        }
+        else { MessagePanel.SetActive(false); messageTimer = 0f; }
+
+
+        /*
+        if (Input.GetKeyDown(KeyCode.Escape) && !_gameIsPaused && SceneManager.GetActiveScene().buildIndex != 0)
+        {
+            Debug.Log("pause");
+            PauseGame();
+            _gameIsPaused = true;
+        }
+        */
+
         /*
         else if (Input.GetKeyDown(KeyCode.Escape) && _gameIsPaused)
         {
@@ -100,7 +144,6 @@ public class GameManager : MonoBehaviour
             ManaParticles.SetActive(true);
             _isPlayingFX = true;
         }
-
         if (_isUsingSpell && PlayerData._currentMana > 0)
         {
             PlayerData._currentMana -= 0.1f;
@@ -110,7 +153,6 @@ public class GameManager : MonoBehaviour
         {
             ManaParticles.SetActive(false);
         }
-        
         if (!_isUsingSpell && PlayerData._currentMana < PlayerData._maxMana)
         {
             ManaParticles.SetActive(false);
@@ -119,6 +161,7 @@ public class GameManager : MonoBehaviour
             ManaSlider.SetMana(PlayerData._currentMana);
         }
 
+        #region SetHealth&Mana
         if (_storedHealth == PlayerData._currentHealth)
         {
             return;
@@ -129,20 +172,20 @@ public class GameManager : MonoBehaviour
             return;
         }
         else { ManaSlider.SetMana(PlayerData._currentMana); }
+        #endregion
 
-
+        #region ManaRegen
         if (!_isUsingSpell && _manaRegenCounter > _manaRegenTimer)
         {
             Debug.Log("Regen Mana");
             PlayerData._currentMana += 0.05f;
         }
-
         if (PlayerData._currentMana <= 0 || !_isUsingSpell)
         {
             Debug.Log(PlayerData._currentMana);
             _manaRegenTimer += Time.deltaTime;
         }
-
+        #endregion
 
         if (PlayerData._currentHealth <= 0)
         {

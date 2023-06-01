@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerDoubleJumpState : PlayerBaseState
 {
@@ -19,6 +20,7 @@ public class PlayerDoubleJumpState : PlayerBaseState
         Debug.Log("double jump");
 
         stateMachine.InputReader.DashEvent += OnDash;
+        stateMachine.LedgeDetector.OnLedgeDetect += HandleLedgeDetect;
 
         stateMachine.ForceReceiver.DoubleJump(stateMachine.DoubleJumpForce);
 
@@ -26,6 +28,7 @@ public class PlayerDoubleJumpState : PlayerBaseState
         //momentum.y = 0;
 
         stateMachine.Animator.CrossFadeInFixedTime(DoubleJumpHash, CrossFadeDuration);
+
     }
     public override void Tick(float deltaTime)
     {
@@ -46,6 +49,8 @@ public class PlayerDoubleJumpState : PlayerBaseState
     {
 
         stateMachine.InputReader.DashEvent -= OnDash;
+        stateMachine.LedgeDetector.OnLedgeDetect -= HandleLedgeDetect;
+
     }
 
     private Vector3 CalculateMovement()
@@ -70,7 +75,20 @@ public class PlayerDoubleJumpState : PlayerBaseState
 
     private void OnDash()
     {
-        stateMachine.SwitchState(new PlayerDashingState(stateMachine));
+        if (!stateMachine.GameManager._canDash)
+        {
+            Debug.Log("can't dash yet :-)");
+            stateMachine.GameManager.MessagePanel.SetActive(true);
+            stateMachine.GameManager.MessagePanel.GetComponent<TextMeshProUGUI>().text = ("can't dash yet :-)");
+            return;
+        }
+        else { stateMachine.SwitchState(new PlayerDashingState(stateMachine)); }
+
     }
 
+
+    private void HandleLedgeDetect(Vector3 ledgeForward)
+    {
+        stateMachine.SwitchState(new PlayerHangingState(stateMachine, ledgeForward));
+    }
 }

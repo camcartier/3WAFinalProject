@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerFallingState : PlayerBaseState
 {
@@ -62,6 +63,14 @@ public class PlayerFallingState : PlayerBaseState
 
     private void OnDash()
     {
+        if (!stateMachine.GameManager._canDash)
+        {
+            Debug.Log("can't dash yet :-)");
+;           stateMachine.GameManager.MessagePanel.SetActive(true);
+            stateMachine.GameManager.MessagePanel.GetComponent<TextMeshProUGUI>().text = ("can't dash yet :-)") ;
+            return;
+        }
+
         stateMachine.SwitchState(new PlayerDashingState(stateMachine));
     }
 

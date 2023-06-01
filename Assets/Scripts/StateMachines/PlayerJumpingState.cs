@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class PlayerJumpingState : PlayerBaseState
 {
@@ -83,7 +84,15 @@ public class PlayerJumpingState : PlayerBaseState
 
     private void OnDash()
     {
-        stateMachine.SwitchState(new PlayerDashingState(stateMachine));
+        if (!stateMachine.GameManager._canDash)
+        {
+            Debug.Log("can't dash yet :-)");
+            stateMachine.GameManager.MessagePanel.SetActive(true);
+            stateMachine.GameManager.MessagePanel.GetComponent<TextMeshProUGUI>().text = ("can't dash yet :-)");
+            return;
+        }
+        else { stateMachine.SwitchState(new PlayerDashingState(stateMachine)); }
+        
     }
 
     private void HandleLedgeDetect(Vector3 ledgeForward)

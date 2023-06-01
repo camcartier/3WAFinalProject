@@ -1902,7 +1902,7 @@ MonoBehaviour:
   QuitButton: {fileID: 1021254938}
   SpecialThanksTXT: {fileID: 370667708}
   ThanksTitle: {fileID: 1274961998}
-  smileyFace: {fileID: 0}
+  smileyFace: {fileID: 1146639230}
 --- !u!4 &1317737663
 Transform:
   m_ObjectHideFlags: 0

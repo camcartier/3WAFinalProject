@@ -9,6 +9,8 @@ public class PlayerHangingState : PlayerBaseState
 
     //private Vector3 closestPoint;
     private Vector3 ledgeForward;
+    private float hangingMinimumTime = 0.75f;
+    private float hangingTimerCounter;
 
     private readonly int HangingHash = Animator.StringToHash("hanging");
     private const float CrossFadeDuration = 0.1f;
@@ -38,24 +40,29 @@ public class PlayerHangingState : PlayerBaseState
         stateMachine.Animator.CrossFadeInFixedTime(HangingHash, CrossFadeDuration);
     }
     public override void Tick(float deltaTime)
-    {
-        if (stateMachine.InputReader.MovementValue.y > 0f)
+    {  
+
+        if (hangingTimerCounter < hangingMinimumTime)
         {
-            //stateMachine.Controller.Move(Vector3.zero);
-            //stateMachine.ForceReceiver.Reset();
-            stateMachine.SwitchState(new PlayerPullUpState(stateMachine));
+            hangingTimerCounter += Time.deltaTime;
         }
-        else if (stateMachine.InputReader.MovementValue.y < 0f)
+        else
         {
-            stateMachine.Controller.Move(Vector3.zero);
-            stateMachine.ForceReceiver.Reset();
-            stateMachine.SwitchState(new PlayerFallingState(stateMachine));
+            if (stateMachine.InputReader.MovementValue.y > 0f)
+            {
+                //stateMachine.Controller.Move(Vector3.zero);
+                //stateMachine.ForceReceiver.Reset();
+                stateMachine.SwitchState(new PlayerPullUpState(stateMachine));
+            }
+            else if (stateMachine.InputReader.MovementValue.y < 0f)
+            {
+                stateMachine.Controller.Move(Vector3.zero);
+                stateMachine.ForceReceiver.Reset();
+                stateMachine.SwitchState(new PlayerFallingState(stateMachine));
+            }
         }
-
-
-
-
     }
+
     public override void Exit()
     {
         CharacterController.enabled = true;
