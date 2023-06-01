@@ -7,7 +7,7 @@ public class PlayerIceAndLava : MonoBehaviour
 {
     public float _iceCoyoteTime = 1.5f;
     private float _iceTimer;
-    public float _lavaCoyoteTime = 1f;
+    public float _lavaCoyoteTime = 0.2f;
     private float _lavaTimer;
 
     [SerializeField] HealthSlider HealthSlider;
@@ -39,7 +39,7 @@ public class PlayerIceAndLava : MonoBehaviour
         {
             //Debug.Log("burning!");
             _messageTXT.text = ("you are burning!");
-            PlayerData._currentHealth -= 0.05f;
+            PlayerData._currentHealth -= 0.1f;
         }
     }
 
@@ -80,14 +80,14 @@ public class PlayerIceAndLava : MonoBehaviour
         {
             MessagePanel.SetActive(false);
             _iceTimer = 0f;
-            Debug.Log(" iced over ");
+            //Debug.Log(" iced over ");
         }
 
         if (other.CompareTag("Lava"))
         {
             MessagePanel.SetActive(false);
             _lavaTimer = 0f;
-            Debug.Log(" toasted out ");
+            //Debug.Log(" toasted out ");
         }
     }
 }

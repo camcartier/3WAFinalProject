@@ -6,8 +6,8 @@ using TMPro;
 public class PlayerFreeLookState : PlayerBaseState
 {
     //public GameManager GameManager;
-    private float dashingCooldown = 2f;
-    private float dashingCooldownCounter = 2f;
+    //private float dashingCooldown = 2f;
+    //private float dashingCooldownCounter = 2f;
 
     Vector3 movement = new Vector3();
     private const float AnimatorDampTime = 0.1f;

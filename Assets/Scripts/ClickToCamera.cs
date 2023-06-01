@@ -7,6 +7,7 @@ public class ClickToCamera : MonoBehaviour
     [SerializeField] Camera Camera1;
     [SerializeField] Camera Camera2;
     [SerializeField] ButtonClicked ButtonClicked;
+    [SerializeField] GameObject Player;
 
     //Camera[] cameraList;
 
@@ -25,11 +26,13 @@ public class ClickToCamera : MonoBehaviour
 
         if (clicked == 0 || clicked == 1)
         {
+            Player.SetActive(false);
             Camera1.enabled = true;
             Camera2.enabled = false;
         }
         if (clicked == 2 || clicked == 3 || clicked == 4)
         {
+            Player.SetActive(true);
             Camera1.enabled = false;
             Camera2.enabled = true;
         }

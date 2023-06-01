@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         BuildIndex = SceneManager.GetActiveScene().buildIndex;
-        Debug.Log(BuildIndex);
+        //Debug.Log(BuildIndex);
     }
 
     // Update is called once per frame
@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
         {
             _canDash= true;
         }
-        if (BuildIndex > 4)
+        if (BuildIndex > 6)
         {
             _canUseMagic= true;
         }
@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log("pause");
+            //Debug.Log("pause");
             PauseGame();
             _gameIsPaused = true;
         }
@@ -187,11 +187,13 @@ public class GameManager : MonoBehaviour
         }
         #endregion
 
+        /*
         if (PlayerData._currentHealth <= 0)
         {
             Debug.Log("0 HP");
             DeathRespawn();
         }
+        */
 
     }
 
@@ -205,19 +207,8 @@ public class GameManager : MonoBehaviour
         Player.transform.position = RespawnPos;
 
         CharaControls.enabled = true;
+
     }
-
-
-
-    public void LevelUp()
-    {
-        PlayerData._maxMana += 10;
-        PlayerData._maxHealth += 2;
-        ManaSlider.SetMaxMana(PlayerData._maxMana);
-        HealthSlider.SetMaxHealth(PlayerData._maxHealth);
-    }
-
-
 
     public void LoadNextScene()
     {
@@ -245,27 +236,28 @@ public class GameManager : MonoBehaviour
 
     //save management
     #region SAVE&LOAD
+    /*
 
-    public void SavePlayer()
-    {
-        SaveSystem.SavePlayer(playerCurrentInfo);
-    }
+public void SavePlayer()
+{
+    SaveSystem.SavePlayer(playerCurrentInfo);
+}
 
-    public void LoadPlayer()
-    {
-        SaveData data = SaveSystem.LoadPlayer();
+public void LoadPlayer()
+{
+    SaveData data = SaveSystem.LoadPlayer();
 
-        playerCurrentInfo.currentSceneIndex = data.sceneIndex;
-        playerCurrentInfo.playerName = data.playerName;
+    playerCurrentInfo.currentSceneIndex = data.sceneIndex;
+    playerCurrentInfo.playerName = data.playerName;
 
-        Vector3 position;
-        position.x = data.position[0];
-        position.y = data.position[1];
-        position.z = data.position[2];
-        
-        transform.position = position;
+    Vector3 position;
+    position.x = data.position[0];
+    position.y = data.position[1];
+    position.z = data.position[2];
 
-    }
+    transform.position = position;
+
+}*/
     #endregion
 
 }

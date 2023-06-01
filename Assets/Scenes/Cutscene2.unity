@@ -6155,6 +6155,7 @@ MonoBehaviour:
   Camera1: {fileID: 136430150}
   Camera2: {fileID: 66967568}
   ButtonClicked: {fileID: 1754190512}
+  Player: {fileID: 1203256508}
 --- !u!4 &597913533
 Transform:
   m_ObjectHideFlags: 0
@@ -6589,6 +6590,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1203256508 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b36b8f227c17c9e41af144d7ca6ccebc,
+    type: 3}
+  m_PrefabInstance: {fileID: 144622253}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1264216927
 GameObject:
   m_ObjectHideFlags: 0
